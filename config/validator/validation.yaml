@@ -1,0 +1,24 @@
+App\Entity\Location:
+    properties:
+        city:
+            - NotBlank: { groups: ['create', 'edit'], message: 'City cannot be blank.' }
+            - Length: { groups: ['create', 'edit'], min: 2, max: 100 }
+        country:
+            - NotBlank: { groups: ['create', 'edit'], message: 'Country is required.' }
+            - Length: { groups: ['create', 'edit'], min: 2, max: 2, exactMessage: 'Country must be 2 letters.' }
+        latitude:
+            - NotBlank: { groups: ['create'], message: 'Latitude is required when creating.' }
+            - Range: { groups: ['create', 'edit'], min: -90, max: 90, notInRangeMessage: 'Latitude must be between {{ min }} and {{ max }}.' }
+        longitude:
+            - NotBlank: { groups: ['create'], message: 'Longitude is required when creating.' }
+            - Range: { groups: ['create', 'edit'], min: -180, max: 180, notInRangeMessage: 'Longitude must be between {{ min }} and {{ max }}.' }
+
+App\Entity\Measurement:
+    properties:
+        location:
+            - NotBlank: { groups: ['create', 'edit'], message: 'Location is required.' }
+        date:
+            - NotBlank: { groups: ['create', 'edit'], message: 'Date is required.' }
+        celsius:
+            - NotBlank: { groups: ['create', 'edit'], message: 'Temperature is required.' }
+            - Range: { groups: ['create', 'edit'], min: -100, max: 100, notInRangeMessage: 'Temperature must be between {{ min }} and {{ max }}.' }
